@@ -19,7 +19,10 @@ class ConverterAPI(APIView):
             cur_from = request.data.get("currency_from")
             cur_to = request.data.get("currency_to")
             convert = get_current_currency(cur_from, cur_to)
-            result = round(convert * amount, 2)
-            return Response({"result": result})
+            if not convert:
+                return Response({"message": "Введена некорректная валюта!"})
+            else:
+                result = round(convert * amount, 2)
+                return Response({"result": result})
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
