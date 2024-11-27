@@ -11,7 +11,7 @@ class ConverterAPI(APIView):
     Представление конвертора валюты
     """
 
-    def post(self, request):
+    def post(self, request) -> Response:
 
         serializer = ConverterSerializer(data=request.data)
         if serializer.is_valid():
