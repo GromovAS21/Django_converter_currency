@@ -4,7 +4,7 @@ from config.settings import API_ACCESS_TOKEN
 
 TOKEN = API_ACCESS_TOKEN
 
-def get_current_currency(cur_from, cur_to):
+def get_current_currency(cur_from, cur_to) -> list:
     """
     Запрос о текущем курсе с сайта https://fixer.io
     """
