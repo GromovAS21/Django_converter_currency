@@ -21,8 +21,8 @@ class ConverterAPI(APIView):
         serializer = ConverterSerializer(data=request.data)
         if serializer.is_valid():
             amount = request.data.get("amount")
-            cur_from = request.data.get("currency_from")
-            cur_to = request.data.get("currency_to")
+            cur_from = request.data.get("currency_from").upper()
+            cur_to = request.data.get("currency_to").upper()
             convert = get_current_currency(cur_from, cur_to)
             if not convert:
                 return Response({"message": "Введена некорректная валюта!"})
