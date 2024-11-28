@@ -20,14 +20,15 @@ class ConverterAPI(APIView):
 
         serializer = ConverterSerializer(data=request.data)
         if serializer.is_valid():
-            amount = request.data.get("amount")
-            cur_from = request.data.get("currency_from").upper()
-            cur_to = request.data.get("currency_to").upper()
+            amount, cur_from, cur_to = tuple(map(
+                lambda x: request.data.get(x),
+                ("amount", "currency_from", "currency_to")
+            ))
             convert = get_current_currency(cur_from, cur_to)
             if not convert:
-                return Response({"message": "Введена некорректная валюта!"})
+                return Response({"message": "Введена некорректная валюта!"}, status=HTTP_400_BAD_REQUEST)
             else:
-                result = round(convert * amount, 2)
+                result = round(convert * int(amount), 2)
                 return Response({"result": result})
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
