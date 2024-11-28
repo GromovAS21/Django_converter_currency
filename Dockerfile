@@ -8,4 +8,4 @@ RUN pip install poetry && poetry config virtualenvs.create false && poetry insta
 
 COPY . .
 
-CMD ["sh", "-c", "python manage.py runserver"]
+CMD ["sh", "-c", "python manage.py runserver 0.0.0.0:8080"]

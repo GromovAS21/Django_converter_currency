@@ -1,4 +1,3 @@
-from django.template.defaultfilters import upper
 from rest_framework import serializers
 
 
